@@ -2,7 +2,6 @@ package com.psybrainy.consumer.service
 
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.Mockito.timeout
 import org.mockito.Mockito.verify
 import org.springframework.beans.factory.annotation.Autowired
@@ -10,10 +9,8 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.test.context.EmbeddedKafka
-import org.springframework.test.context.junit.jupiter.SpringExtension
 
 
-@ExtendWith(SpringExtension::class)
 @SpringBootTest
 @EmbeddedKafka(partitions = 1, topics = ["hola"])
 class ConsumerKafkaServiceTest {
