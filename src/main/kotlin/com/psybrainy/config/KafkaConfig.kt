@@ -27,9 +27,11 @@ class KafkaConfig {
         val consumerProps = mapOf(
             ConsumerConfig.GROUP_ID_CONFIG to "consumer_group_id",
             ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServers,
+
+            ConsumerConfig.AUTO_OFFSET_RESET_CONFIG to "earliest",
+
             ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
-            ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
-            ConsumerConfig.AUTO_OFFSET_RESET_CONFIG to "earliest"
+            ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java
         )
         return DefaultKafkaConsumerFactory(consumerProps)
     }

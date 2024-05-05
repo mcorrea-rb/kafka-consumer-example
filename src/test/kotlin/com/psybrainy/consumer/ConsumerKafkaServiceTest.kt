@@ -1,5 +1,6 @@
-package com.psybrainy.consumer.service
+package com.psybrainy.consumer
 
+import com.psybrainy.consumer.service.ExternalService
 import org.apache.kafka.clients.producer.ProducerRecord
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.timeout
@@ -12,7 +13,7 @@ import org.springframework.kafka.test.context.EmbeddedKafka
 
 
 @SpringBootTest
-@EmbeddedKafka(partitions = 1, topics = ["hola"])
+@EmbeddedKafka(partitions = 1, topics = ["test-topic"])
 class ConsumerKafkaServiceTest {
 
 
@@ -20,14 +21,16 @@ class ConsumerKafkaServiceTest {
     private lateinit var kafkaTemplate: KafkaTemplate<String, String>
 
     @MockBean
-    @Autowired
     private lateinit var externalService: ExternalService
 
 
     @Test
     fun `test listen receives messages correctly`() {
+
         val expectedMessage = "Hello Kafka!"
-        kafkaTemplate.send(ProducerRecord("hola", expectedMessage))
+
+        kafkaTemplate.send(ProducerRecord("test-topic", expectedMessage))
+
         verify(externalService, timeout(10000)).execute(expectedMessage)
 
     }

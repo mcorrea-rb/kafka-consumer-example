@@ -13,7 +13,7 @@ class ConsumerKafkaService(
     val externalService: ExternalService
 ) {
 
-    @KafkaListener( topics = ["hola"], groupId = "consumer_group_id" )
+    @KafkaListener( topics = ["test-topic"], groupId = "consumer_group_id" )
     fun listen(message: String){
         log.info("Aca tenes el mensaje: {}", message)
         externalService.execute(message)
