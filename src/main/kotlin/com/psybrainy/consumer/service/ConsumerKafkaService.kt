@@ -1,6 +1,9 @@
 package com.psybrainy.consumer.service
 
 import com.psybrainy.config.CompanionLogger
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.springframework.context.ApplicationEvent
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.context.event.EventListener
@@ -14,7 +17,7 @@ class ConsumerKafkaService(
 ) {
 
     @KafkaListener( topics = ["test-topic"], groupId = "consumer_group_id" )
-    fun listen(message: String){
+    fun listen(message: String) = CoroutineScope(Dispatchers.IO).launch {
         log.info("Aca tenes el mensaje: {}", message)
         externalService.execute(message)
     }
