@@ -2,6 +2,7 @@ package com.psybrainy.consumer
 
 import com.psybrainy.consumer.service.ExternalService
 import org.apache.kafka.clients.producer.ProducerRecord
+import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.timeout
 import org.mockito.Mockito.verify
@@ -25,7 +26,7 @@ class ConsumerKafkaServiceTest {
 
 
     @Test
-    fun `test listen receives messages correctly`() {
+    fun `test listen receives messages correctly`() = runTest {
 
         val expectedMessage = "Hello Kafka!"
 
